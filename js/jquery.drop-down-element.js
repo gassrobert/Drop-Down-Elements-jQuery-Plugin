@@ -18,6 +18,13 @@
 				// Check if it the element has a class of elementForDropDown
 				if ( $( this ).hasClass( "elementForDropDown" ) ) {
 
+						// Obtain the text from the data-ddetext attribute
+						if ($(this).data("ddetext") != undefined) {
+							var dropDownElemText = $(this).data("ddetext");
+						} else {
+							var dropDownElemText = "&nbsp;";
+						}
+
 						// Get the tag setting for the drop down element
 						var preElemTag = settings.tag;
 
