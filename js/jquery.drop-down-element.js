@@ -1,5 +1,5 @@
 (function($) {
-	$.fn.shuffleString = function() {
+	$.fn.droppedDownElement = function() {
 
 		return this.each(function() {
 			

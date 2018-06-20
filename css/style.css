@@ -1,0 +1,35 @@
+/* font icons styling */
+/* font icons provided courtesy of https://icomoon.io/ */
+@font-face {
+  font-family: 'drop-down-element';
+  src:  url('fonts/drop-down-element.eot?8hweov');
+  src:  url('fonts/drop-down-element.eot?8hweov#iefix') format('embedded-opentype'),
+    url('fonts/drop-down-element.ttf?8hweov') format('truetype'),
+    url('fonts/drop-down-element.woff?8hweov') format('woff'),
+    url('fonts/drop-down-element.svg?8hweov#drop-down-element') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.drop-down-element {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'drop-down-element' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* The icons to be prepended to content using jQuery in jquery.drop-down-element.js */
+.dropdownelem-plus:before {
+  content: "\ea0a";
+}
+.dropdownelem-minus:before {
+  content: "\ea0b";
+}
