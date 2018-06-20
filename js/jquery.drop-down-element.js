@@ -129,7 +129,7 @@
 								$(dropDownElemTextTag).insertAfter(this);
 							}						
 
-						
+
 
 				} // End of if ( $( this ).hasClass( "elementForDropDown" ) ) {
 
@@ -147,6 +147,51 @@
 
 					// Apply the color settings to the - icon
 					$('.dropdownelem-minus').css('color', settings.iconColor);
+
+					// Get the settings tag
+					var preElemTag = settings.tag;
+
+						// Get the plain text of the settings tag
+						if (preElemTag.indexOf(' ') >= 0) {
+
+							// get string from between < and empty space
+							var preElemTagArray = preElemTag.split(' ');
+							preElemTagBegin = preElemTagArray[0];
+
+							var res = preElemTagBegin.replace("<", "");
+							
+						} else {
+
+							// get string from between < and >
+							var preRes = preElemTag.replace("<", "");
+							var res = preRes.replace(">", "");
+
+						} // End of if (preElemTag.indexOf(' ') >= 0) {
+
+					// Check if the settings tag is a table or a row or something else
+					if (res == "table") {
+						
+						// The tag setting can't be table, so using <tr> is suggested
+						alert("The table tag isn't supported as a setting. Try the <tr> tag instead.");
+
+					} else if (res == "tr") {
+
+						// Get the tag of the element that contains the icon
+						var elemTagName = $(this).closest('.elementForDropDown').prop('tagName');
+
+						// Check the tag of the element that contains the icon and then show the dropdown
+						if (elemTagName == 'TABLE') {
+							alert("Drop Down Elements need to be placed in tags that can contain content. This means the class shouldn't be put into <form>, <table> or <tr> tags.");
+						} else if (elemTagName == 'TR') {
+							alert("Drop Down Elements need to be placed in tags that can contain content. This means the class shouldn't be put into <form>, <table> or <tr> tags.");
+						} else if (elemTagName == 'TD') {
+							$(this).closest('tr').next('tr').slideDown("fast");
+						} else {
+							$(this).next().slideDown("fast");
+						}
+					} else {
+						$(this).next().slideDown("fast");
+					} // End of if (res == "table") {
 
 				} else if (elemClass == "drop-down-element dropdownelem-minus") {
 
