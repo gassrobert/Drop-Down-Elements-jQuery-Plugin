@@ -12,7 +12,7 @@ Apply the elementForDropDown class to the HTML elements in your page that you wa
 4. td
 5. label
 
-In order to change the default settings for the + and - icons and the drop down element create a javascript file linked to that page and in this file call the droppedDownElement function and apply the settings that you want.
+In order to change the default settings for the + and - icons and the drop down element, create a javascript file linked to that page and in this file call the droppedDownElement function and apply the settings that you want.
 
 Below is a list of the settings for this plugin:
 
