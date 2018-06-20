@@ -3,7 +3,8 @@
 
 		// Obtain the default setttings to apply to elements.
 		var settings = $.extend({
-			iconColor: "#000000"
+			iconColor: "#000000", 
+			tag: '<tr>'
 		}, options);
 
 		return this.each(function() {
@@ -13,6 +14,14 @@
 
 			// Apply settings color to + icon.
 			$('.dropdownelem-plus').css('color', settings.iconColor);
+
+				// Check if it the element has a class of elementForDropDown
+				if ( $( this ).hasClass( "elementForDropDown" ) ) {
+
+						// Get the tag setting for the drop down element
+						var preElemTag = settings.tag;
+
+				} // End of if ( $( this ).hasClass( "elementForDropDown" ) ) {
 
 			// If the user clicks on the icon or its parent, check if the icon is a + or a -
 			$(this).on( "click", function(event) {

@@ -1,3 +1,4 @@
 $(".elementForDropDown").droppedDownElement({
-	iconColor: "blue"
+	iconColor: "blue", 
+	tag: '<ul>'
 });
