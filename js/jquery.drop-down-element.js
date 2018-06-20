@@ -9,6 +9,7 @@
 			tag: '<tr>'
 		}, options);
 
+		// Apply settings and attributes to elements so they start hidden and then expand into display or contract based on click events.
 		return this.each(function() {
 
 			// Prepend + icon to elements marked with a class of elementForDropDown
@@ -26,7 +27,7 @@
 						} else {
 							var dropDownElemText = "&nbsp;";
 						}
-
+						
 						// Get the tag setting for the drop down element
 						var preElemTag = settings.tag;
 
@@ -131,11 +132,12 @@
 
 
 
+
 				} // End of if ( $( this ).hasClass( "elementForDropDown" ) ) {
 
 			// If the user clicks on the icon or its parent, check if the icon is a + or a -
 			$(this).on( "click", function(event) {
-
+	
 				// Get the full class of elements with the drop-down-element class
 				var elemClass = $(this).find('.drop-down-element').attr("class");
 
@@ -201,11 +203,52 @@
 					// Apply the color settings to the + icon
 					$('.dropdownelem-plus').css('color', settings.iconColor);
 
-				}					
+						// Get the tag setting for the drop down element
+						var preElemTag = settings.tag;
 
+						if (preElemTag.indexOf(' ') >= 0) {
+							// get string from between < and empty space
+							var preElemTagArray = preElemTag.split(' ');
+							preElemTagBegin = preElemTagArray[0];
+
+							var res = preElemTagBegin.replace("<", "");
+							
+						} else {
+							// get string from between < and >
+							var preRes = preElemTag.replace("<", "");
+							var res = preRes.replace(">", "");
+
+						}
+
+					// Check if the settings tag is a table or a row or something else
+					if (res == "table") {
+
+						// The tag setting can't be table, so using <tr> is suggested
+						alert("The table tag isn't supported as a setting. Try the <tr> tag instead.");
+
+					} else if (res == "tr") {
+
+						// Get the tag of the element that contains the icon
+						var elemTagName = $(this).closest('.elementForDropDown').prop('tagName');
+
+						// Check the tag of the element that contains the icon and then conceal the dropdown
+						if (elemTagName == 'TD') {
+							$(this).closest('tr').next('tr').slideUp("fast");
+						} else if (elemTagName == 'TR') {
+							alert("Drop Down Elements need to be placed in tags that can contain content. This means the class shouldn't be put into <form>, <table> or <tr> tags.");
+						} else if (elemTagName == 'TABLE') {
+							alert("Drop Down Elements need to be placed in tags that can contain content. This means the class shouldn't be put into <form>, <table> or <tr> tags.");
+						} else {
+							$(this).next().slideUp("fast");
+						}
+
+					} else {
+						$(this).next().slideUp("fast");
+					} // End of if (res == "table") {
+
+				} // End of if (elemClass == "drop-down-element dropdownelem-plus") {
 
 			}); // End of $(this).on( "click", function(event) {
-
-		})
-	}
-}(jQuery));
+		}) // End of return this.each(function() {
+	} // End of $.fn.droppedDownElement = function(options) {
+}(jQuery)); // End of (function($) {
