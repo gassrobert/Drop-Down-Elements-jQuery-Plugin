@@ -28,6 +28,25 @@
 						// Get the tag setting for the drop down element
 						var preElemTag = settings.tag;
 
+						// Set up closing element tag
+						if (preElemTag.indexOf(' ') >= 0) {
+							// get string from between < and empty space
+							var preElemTagArray = preElemTag.split(' ');
+							preElemTagBegin = preElemTagArray[0];
+
+								var closingElemTag = preElemTagBegin.substr(0, 1) + "/" + preElemTagBegin.substr(1) + ">";
+							
+						} else {
+							// get string from between < and >
+							var preElemTagArray = preElemTag.split(' ');
+							preElemTagBegin = preElemTagArray[0];
+
+							var closingElemTag = preElemTag.substr(0, 1) + "/" + preElemTag.substr(1);
+							
+						}
+
+						
+
 				} // End of if ( $( this ).hasClass( "elementForDropDown" ) ) {
 
 			// If the user clicks on the icon or its parent, check if the icon is a + or a -
