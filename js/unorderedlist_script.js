@@ -1,3 +1,3 @@
 $(".elementForDropDown").droppedDownElement({
-
+	iconColor: "blue"
 });
