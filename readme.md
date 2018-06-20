@@ -23,12 +23,12 @@ Below is a list of the settings for this plugin:
 
 Below is an example of how the plugin is called from within a JavaScript file.
 
-	`$(".elementForDropDown").droppedDownElement({
+	$(".elementForDropDown").droppedDownElement({
 		iconColor: "blue", 
 		dropDownBgColor: "#483D8B", 
 		dropDownColor: "#F8F8FF", 
 		tag: '<tr>'
-	});`
+	});
 
 If no tag is specified the default of tr is used for the tag and the colors are reduced to plain black and white. 
 
