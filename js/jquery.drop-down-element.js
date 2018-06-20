@@ -4,6 +4,8 @@
 		// Obtain the default setttings to apply to elements.
 		var settings = $.extend({
 			iconColor: "#000000", 
+			dropDownBgColor: "#FFFFFF", 
+			dropDownColor: "#000000", 
 			tag: '<tr>'
 		}, options);
 
@@ -44,6 +46,88 @@
 							var closingElemTag = preElemTag.substr(0, 1) + "/" + preElemTag.substr(1);
 							
 						}
+
+							// Find if the element tag is part of a table or not
+							if (closingElemTag == "</tr>") {
+ 
+ 								// Get the tag of the element that contains the icon
+								var elemTagName = $(this).closest('.elementForDropDown').prop('tagName');
+								var row = $(this).closest('tr');
+								var table = $(this).closest('table');
+
+								// Check the tag of the element that contains the icon
+								if (elemTagName == 'TD') {
+
+									// Get the closest row
+									var oneRowTD = $('td', $(this).closest('tr')).length;
+
+									// Get style attribute setttings values for the drop down
+									var ddBackgroundColor =  " background-color: " + settings.dropDownBgColor + ";";
+									var ddColor =  " color: " + settings.dropDownColor + ";";
+
+									// Set display: none in variables for the drop down	
+									var preElemTagIndex = preElemTag.lastIndexOf(">");
+									preElemTag = preElemTag.substr(0, preElemTagIndex) + ' style="display: none;' + ddBackgroundColor + ddColor + '"' + preElemTag.substr(preElemTagIndex);
+
+								  	var dropDownElemTextTag = preElemTag +'<td colspan="'+ oneRowTD +'">'+ dropDownElemText +'</td>'+ closingElemTag;
+
+								  	// Insert the drop down after the row
+									$(dropDownElemTextTag).insertAfter(row);
+
+								} else if (elemTagName == 'TR') {
+
+									// tags that can't contain text shouldn't be given the elementForDropDown class since the icon needs to be inserted into something
+									alert("Drop Down Elements need to be placed in tags that can contain content. This means the class shouldn't be put into <form>, <table> or <tr> tags.");
+
+								} else if (elemTagName == 'TABLE') {
+
+									// tags that can't contain text shouldn't be given the elementForDropDown class since the icon needs to be inserted into something
+									alert("Drop Down Elements need to be placed in tags that can contain content. This means the class shouldn't be put into <form>, <table> or <tr> tags.");
+
+								} else {
+
+									// Get style attribute setttings values for the drop down
+									var ddBackgroundColor= " background-color: " + settings.dropDownBgColor + ";";
+									var ddColor =  " color: " + settings.dropDownColor + ";";
+
+									// Set display: none in variables for the drop down
+									var dropDownElemTextTag = '<table style="display: none;' + ddBackgroundColor + ddColor + '">'+preElemTag +'<td>'+ dropDownElemText +'</td>'+ closingElemTag+'</table>';
+
+									// Insert the drop down after the element containing the icon
+									$(dropDownElemTextTag).insertAfter(this);
+								}										
+
+							} else {
+								
+								// Get the tag of the element that contains the icon
+								var elemTagName = $(this).closest('.elementForDropDown').prop('tagName');
+
+								// Get style attribute setttings values for the drop down
+								var ddBackgroundColor= " background-color: " + settings.dropDownBgColor + ";";
+								var ddColor =  " color: " + settings.dropDownColor + ";";
+
+								// Check the tag of the element that contains the icon
+								if (elemTagName == 'TR') {
+
+									// tags that can't contain text shouldn't be given the elementForDropDown class since the icon needs to be inserted into something
+									alert("Drop Down Elements need to be placed in tags that can contain content. This means the class shouldn't be put into <form>, <table> or <tr> tags.");
+
+								} else if (elemTagName == 'TABLE') {
+
+									// tags that can't contain text shouldn't be given the elementForDropDown class since the icon needs to be inserted into something
+									alert("Drop Down Elements need to be placed in tags that can contain content. This means the class shouldn't be put into <form>, <table> or <tr> tags.");
+
+								} 
+
+								// Set display: none in variables for the drop down	
+								var preElemTagIndex = preElemTag.lastIndexOf(">");
+								preElemTag = preElemTag.substr(0, preElemTagIndex) + ' style="display: none;' + ddBackgroundColor + ddColor +  '"' + preElemTag.substr(preElemTagIndex);
+
+								var dropDownElemTextTag = preElemTag + dropDownElemText + closingElemTag;
+
+								// Insert the drop down after the element containing the icon
+								$(dropDownElemTextTag).insertAfter(this);
+							}						
 
 						
 
